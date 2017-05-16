@@ -2250,4 +2250,6 @@ static inline void tcp_listendrop(const struct sock *sk)
 	__NET_INC_STATS(sock_net(sk), LINUX_MIB_LISTENDROPS);
 }
 
+enum hrtimer_restart tcp_pace_kick(struct hrtimer *timer);
+
 #endif	/* _TCP_H */
