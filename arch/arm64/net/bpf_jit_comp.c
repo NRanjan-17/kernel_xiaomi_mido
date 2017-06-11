@@ -208,6 +208,10 @@ static int build_prologue(struct jit_ctx *ctx, bool ebpf_from_cbpf)
 
 	ctx->stack_size = STACK_ALIGN(prog->aux->stack_depth);
 
+	/* 4 byte extra for skb_copy_bits buffer */
+	ctx->stack_size = prog->aux->stack_depth + 4;
+	ctx->stack_size = STACK_ALIGN(ctx->stack_size);
+
 	/* Set up function call stack */
 	emit(A64_SUB_I(1, A64_SP, A64_SP, ctx->stack_size), ctx);
 	return 0;
