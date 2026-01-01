@@ -218,7 +218,7 @@ TRACE_EVENT(msm_cam_isp_overflow,
 );
 
 TRACE_EVENT(msm_cam_tasklet_debug_dump,
-	TP_PROTO(struct dual_vfe_state tasklet_state),
+	TP_PROTO(struct dual_vfe_state *tasklet_state),
 	TP_ARGS(tasklet_state),
 	TP_STRUCT__entry(
 		__field(unsigned int, vfe_id)
@@ -230,18 +230,18 @@ TRACE_EVENT(msm_cam_tasklet_debug_dump,
 		__field(long, tv_usec)
 	),
 	TP_fast_assign(
-		__entry->vfe_id = tasklet_state.current_vfe_irq.vfe_id;
+		__entry->vfe_id = tasklet_state->current_vfe_irq.vfe_id;
 		__entry->irq_status0 =
-			tasklet_state.current_vfe_irq.irq_status0;
+			tasklet_state->current_vfe_irq.irq_status0;
 		__entry->irq_status1 =
-			tasklet_state.current_vfe_irq.irq_status1;
-		__entry->core = tasklet_state.current_vfe_irq.core;
+			tasklet_state->current_vfe_irq.irq_status1;
+		__entry->core = tasklet_state->current_vfe_irq.core;
 		__entry->ping_pong_status =
-			tasklet_state.current_vfe_irq.ping_pong_status;
+			tasklet_state->current_vfe_irq.ping_pong_status;
 		__entry->tv_sec =
-			tasklet_state.current_vfe_irq.ts.buf_time.tv_sec;
+			tasklet_state->current_vfe_irq.ts.buf_time.tv_sec;
 		__entry->tv_usec =
-			tasklet_state.current_vfe_irq.ts.buf_time.tv_usec;
+			tasklet_state->current_vfe_irq.ts.buf_time.tv_usec;
 	),
 	TP_printk("vfe_id %d, core %d, irq_st0 0x%x, irq_st1 0x%x\n"
 		"pi_po_st 0x%x, time %ld:%ld",
@@ -256,7 +256,7 @@ TRACE_EVENT(msm_cam_tasklet_debug_dump,
 );
 
 TRACE_EVENT(msm_cam_ping_pong_debug_dump,
-	TP_PROTO(struct dual_vfe_state ping_pong_state),
+	TP_PROTO(struct dual_vfe_state *ping_pong_state),
 	TP_ARGS(ping_pong_state),
 	TP_STRUCT__entry(
 		__field(unsigned int, curr_vfe_id)
@@ -272,25 +272,25 @@ TRACE_EVENT(msm_cam_ping_pong_debug_dump,
 	),
 	TP_fast_assign(
 		__entry->curr_vfe_id =
-			ping_pong_state.current_vfe_irq.vfe_id;
+			ping_pong_state->current_vfe_irq.vfe_id;
 		__entry->curr_irq_status0 =
-			ping_pong_state.current_vfe_irq.irq_status0;
+			ping_pong_state->current_vfe_irq.irq_status0;
 		__entry->curr_irq_status1 =
-			ping_pong_state.current_vfe_irq.irq_status1;
+			ping_pong_state->current_vfe_irq.irq_status1;
 		__entry->curr_ping_pong_status =
-			ping_pong_state.current_vfe_irq.ping_pong_status;
+			ping_pong_state->current_vfe_irq.ping_pong_status;
 		__entry->othr_vfe_id =
-			ping_pong_state.other_vfe.vfe_id;
+			ping_pong_state->other_vfe.vfe_id;
 		__entry->othr_irq_status0 =
-			ping_pong_state.other_vfe.irq_status0;
+			ping_pong_state->other_vfe.irq_status0;
 		__entry->othr_irq_status1 =
-			ping_pong_state.other_vfe.irq_status1;
+			ping_pong_state->other_vfe.irq_status1;
 		__entry->othr_ping_pong_status =
-			ping_pong_state.other_vfe.ping_pong_status;
+			ping_pong_state->other_vfe.ping_pong_status;
 		__entry->othr_tv_sec =
-			ping_pong_state.other_vfe.ts.buf_time.tv_sec;
+			ping_pong_state->other_vfe.ts.buf_time.tv_sec;
 		__entry->othr_tv_usec =
-			ping_pong_state.other_vfe.ts.buf_time.tv_usec
+			ping_pong_state->other_vfe.ts.buf_time.tv_usec
 	),
 	TP_printk("vfe_id %d, irq_st0 0x%x, irq_st1 0x%x, pi_po_st 0x%x\n"
 		"other vfe_id %d, irq_st0 0x%x, irq_st1 0x%x\n"

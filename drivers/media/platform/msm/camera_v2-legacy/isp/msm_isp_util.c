@@ -2479,7 +2479,7 @@ void msm_isp_dump_irq_debug(void)
 		count = dump_data.first;
 	}
 	for (i = 0; i < count; i++) {
-		trace_msm_cam_ping_pong_debug_dump(dump_data.arr[index]);
+		trace_msm_cam_ping_pong_debug_dump(&dump_data.arr[index]);
 		index = (index + 1) % MAX_ISP_PING_PONG_DUMP_SIZE;
 	}
 }
@@ -2496,7 +2496,7 @@ void msm_isp_dump_taskelet_debug(void)
 		count = tasklet_data.first;
 	}
 	for (i = 0; i < count; i++) {
-		trace_msm_cam_tasklet_debug_dump(tasklet_data.arr[index]);
+		trace_msm_cam_tasklet_debug_dump(&tasklet_data.arr[index]);
 		index = (index + 1) % MAX_ISP_PING_PONG_DUMP_SIZE;
 	}
 }
