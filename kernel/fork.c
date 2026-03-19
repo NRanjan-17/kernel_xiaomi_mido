@@ -682,6 +682,16 @@ static __latent_entropy int dup_mmap(struct mm_struct *mm,
 		if (!(tmp->vm_flags & VM_WIPEONFORK))
 			retval = copy_page_range(mm, oldmm, mpnt);
 
+		if (tmp->vm_flags & VM_WIPEONFORK) {
+			/*
+			 * VM_WIPEONFORK is a security feature to zero
+			 * anonymous memory in the child to prevent the child
+			 * from inheriting sensitive data from the parent.
+			 */
+			zap_page_range(tmp, tmp->vm_start,
+				       tmp->vm_end - tmp->vm_start, NULL);
+		}
+
 		if (tmp->vm_ops && tmp->vm_ops->open)
 			tmp->vm_ops->open(tmp);
 
