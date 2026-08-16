@@ -86,7 +86,7 @@ fi
 make -j"$(nproc --all)" O=out ARCH=arm64 LLVM=1 LLVM_IAS=1 CC=clang \
   CLANG_TRIPLE="$CLANG_PATH/aarch64-linux-gnu-" \
   CROSS_COMPILE="$GCC64_PATH/bin/aarch64-elf-" \
-  CROSS_COMPILE_ARM32="$GCC32_PATH/bin/arm-eabi-"
+  CROSS_COMPILE_ARM32="$GCC32_PATH/bin/arm-none-eabi-"
 
 # ===== Clone AnyKernel3 =====
 echo "==> Packaging with AnyKernel3"
